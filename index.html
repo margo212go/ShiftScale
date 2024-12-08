@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShiftScale</title>
+  <style>
+    /* General styles */
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      box-sizing: border-box;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /*HEADER*/
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+      object-fit: cover;
+    }
+
+    header {
+      position: fixed;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 1px 0;
+      text-align: center;
+      width: 100%;
+      animation: fadeIn 1s ease-in-out;
+      z-index: 100;
+    }
+
+    #logo {
+      width: 150px; /* Adjust the width to your preferred size */
+      height: auto; /* Maintains the aspect ratio of the logo */
+      max-height:max-content; /* Optional: Prevents the logo from exceeding a certain height */
+      
+    }
+
+    header h1 a {
+      text-decoration: none;
+      color: white;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 1px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      padding: 5px 10px;
+    }
+
+    nav ul li a:hover {
+      background: white;
+      color: black;
+      border-radius: 5px;
+    }
+
+    /*BODY*/
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      opacity: 0;
+      animation: fadeInUp 1s ease-in-out forwards;
+    }
+
+    h2 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .intro-text {
+      font-size: 1.5em;
+      margin-bottom: 40px;
+      max-width: 600px;
+      color: #ccc;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .choices {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      animation: fadeInUp 2s ease-in-out;
+    }
+
+    .choice {
+      text-decoration: none;
+      color: white;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 400px;
+      height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: background 0.3s ease, transform 0.3s ease;
+      opacity: 0;
+      animation: fadeInUp 1s ease-in-out forwards;
+    }
+
+    .choice:hover {
+      background: rgba(255, 255, 255, 0.7);
+      color: black;
+      transform: scale(1.05);
+    }
+
+    .choice h3 {
+      font-size: 1.5em;
+      margin-bottom: 15px;
+    }
+
+    .choice p {
+      font-size: 1.1em;
+    }
+
+    /* Keyframe Animations */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Tool Definitions */
+    .scrollable-content {
+      padding: 50px 20px;
+      max-width: 90%;
+      margin: 50px auto;
+      background: linear-gradient(140deg, rgba(0, 0, 0, 0.8), rgb(98, 35, 245));
+      border-radius: 10px;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+      animation: fadeInUp 3s ease-in-out;
+    }
+
+    .tool-definitions {
+      font-size: 1.2em;
+      line-height: 1.8;
+      color: #ccc;
+      margin: 20px 0;
+      text-align: justify;
+    }
+
+    .tool-definitions strong {
+      color: #fffb00;
+      font-size: 1.4em;
+    }
+
+    .tool-definitions p {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 5px;
+    }
+
+    /* Footer Styles */
+    footer {
+      background-color: #000000;
+      background: linear-gradient(90deg, rgb(48, 45, 45), rgb(0, 0, 0));
+      color: white;
+      text-align: left;
+      padding: 20px;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      height: 250px;
+    }
+
+    .site-footer {
+  background-color: #0e0e0e; /* Dark background */
+  color: #fff;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.footer-logo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 25%;
+}
+
+.logo {
+  max-width: 300px;
+  margin-bottom: 10px;
+  margin-top: 50px;
+}
+
+.stay-loop {
+  background-color: #ff0055;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.footer-links {
+  flex: 3;
+  display: flex;
+  justify-content: space-around;
+  width: 75%;
+}
+
+.footer-links div {
+  margin: 0 20px;
+}
+
+.footer-links h4 {
+  margin-bottom: 15px;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links ul li {
+  margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-links ul li a:hover {
+  color: #ff0055;
+}
+
+
+    /* Fade-out effect for h2 */
+    .fade-out-h2 {
+      animation: fadeOut 1.5s forwards;
+    }
+
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <video class="video-background" autoplay loop muted>
+    <source src="Radial Beams Bridge - Medium - HD 1080.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <header>
+    <h1>
+      <a href="index.html">
+        <img src="logo 2.png" alt="" id="logo">
+      </a>
+    </h1>
+    <nav>
+      <ul>
+        <li><a href="number-converter.html">Number System Conversion</a></li>
+        <li><a href="calculator.html">Calculator</a></li>
+        <li><a href="distance-converter.html">Distance Converter</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section class="container">
+      <h2 class="fade-out-h2">Welcome to ShiftScale</h2>
+      <p class="intro-text">
+        A place for all your essential tools. Whether it's converting numbers, solving complex calculations, or converting distances, we’ve got you covered. Start exploring below!
+      </p>
+
+      <div class="choices">
+        <a href="number-converter.html" class="choice">
+          <h3>Number System Conversion</h3>
+          <p>Convert numbers between different systems (Binary, Decimal, Hexadecimal, Octal).</p>
+        </a>
+        <a href="calculator.html" class="choice">
+          <h3>Calculator</h3>
+          <p>Perform various arithmetic calculations easily.</p>
+        </a>
+        <a href="distance-converter.html" class="choice">
+          <h3>Distance Converter</h3>
+          <p>Convert distances between various units.</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- Tool Definitions -->
+    <div class="scrollable-content">
+      <h3>Explore Our Tools</h3>
+      <p class="tool-definitions">
+        <strong>Number Converter:</strong> Unleash the power of number systems! Dive into the world of Binary, Decimal, Hexadecimal, and Octal conversions – perfect for programmers, tech enthusiasts, or anyone dealing with base systems in coding or electronics.
+      </p>
+      <p class="tool-definitions">
+        <strong>Calculator:</strong> Need to solve a quick problem or perform arithmetic? Our calculator makes it simple, offering everything from basic operations to complex calculations. Just type and calculate!
+      </p>
+      <p class="tool-definitions">
+        <strong>Distance Converter:</strong> Whether you're planning a trip or working on a project, quickly switch between kilometers, miles, meters, feet, and more. The ultimate distance conversion tool for travelers, engineers, and explorers!
+      </p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-logo">
+        <img src="logo 1.png" alt="" class="logo" />
+      </div>
+  
+      <div class="footer-links">
+        <div>
+          <h4>Learn More</h4>
+          <ul>
+            <li><a href="https://youtu.be/FFDMzbrEXaE?si=LGe__Aa7NrfGLPmB">Number System Conversion</a></li>
+            <li><a href="https://www.w3schools.com/c/index.php">Basic C Programming</a></li>
+            <li><a href="https://www.w3schools.com/css/default.asp">Basic CSS</a></li>
+            <li><a href="https://www.w3schools.com/js/default.asp">Basic JavaScript</a></li>
+          </ul>
+        </div>
+      </div>
+  
+    </div>
+  </footer>
+  
+
+  <script>
+    // Detect when h2 crosses header and add fade-out class
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      const h2 = document.querySelector('h2');
+      const headerHeight = header.offsetHeight;
+      const h2Position = h2.getBoundingClientRect().top;
+
+      if (h2Position < headerHeight) {
+        h2.classList.add('fade-out-h2');
+      } else {
+        h2.classList.remove('fade-out-h2');
+      }
+    });
+  </script>
+</body>
+</html>

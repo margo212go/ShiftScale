@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number System Converter</title>
+  <style>
+    /* General styles */
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      box-sizing: border-box;
+      color: white;
+    }
+
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+      object-fit: cover;
+    }
+
+    header {
+      position: fixed;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 1px 0;
+      text-align: center;
+      width: 100%;
+      animation: fadeIn 1s ease-in-out;
+      z-index: 100;
+    }
+
+    #logo {
+      width: 150px; /* Adjust the width to your preferred size */
+      height: auto; /* Maintains the aspect ratio of the logo */
+      max-height:max-content; /* Optional: Prevents the logo from exceeding a certain height */
+      
+    }
+
+    header h1 a {
+      text-decoration: none;
+      color: white;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 1px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      padding: 5px 10px;
+    }
+
+    nav ul li a:hover {
+      background: white;
+      color: black;
+      border-radius: 5px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .converter {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .converter label, .converter select, .converter button {
+      display: block;
+      width:100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 5px;
+    }
+
+    .converter input {
+      display: flex;
+      width: 80%;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 5px;
+      align-items: center;
+    }
+
+        /* Footer Styles */
+        footer {
+      background-color: #000000;
+      background: linear-gradient(90deg, rgb(48, 45, 45), rgb(0, 0, 0));
+      color: white;
+      text-align: left;
+      padding: 20px;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      height: 200px;
+    }
+
+    .site-footer {
+  background-color: #0e0e0e; /* Dark background */
+  color: #fff;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.footer-logo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 25%;
+}
+
+.logo {
+  max-width: 300px;
+  margin-bottom: 10px;
+  margin-top: 50px;
+}
+
+.stay-loop {
+  background-color: #ff0055;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.footer-links {
+  flex: 3;
+  display: flex;
+  justify-content: space-around;
+  width: 75%;
+}
+
+.footer-links div {
+  margin: 0 20px;
+}
+
+.footer-links h4 {
+  margin-bottom: 15px;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links ul li {
+  margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-links ul li a:hover {
+  color: #ff0055;
+}
+
+
+    /* Fade-out effect for h2 */
+    .fade-out-h2 {
+      animation: fadeOut 1.5s forwards;
+    }
+
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+
+    .converter select {
+      background-color: #f4f4f4;
+      border: none;
+      color: #333;
+      align-items: center;
+    }
+    .converter input {
+      background-color: #f4f4f4;
+      border: none;
+      color: #333;
+      align-items: center;  
+      text-align: center;
+      width: 95%;
+    }
+
+    .converter button {
+      background-color: #333;
+      color: white;
+      cursor: pointer;
+    }
+
+    .converter button:hover {
+      background-color: #555;
+    }
+
+    .result {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 20px;
+      color: #f4f4f4;
+    }
+
+  </style>
+</head>
+<body>
+  <video class="video-background" autoplay loop muted>
+    <source src="Radial Beams Bridge - Medium - HD 1080.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <header>
+    <h1>
+      <a href="index.html">
+        <img src="logo 2.png" alt="" id="logo">
+      </a>
+    </h1>
+    <nav>
+      <ul>
+        <li><a href="number-converter.html">Number System Conversion</a></li>
+        <li><a href="calculator.html">Calculator</a></li>
+        <li><a href="distance-converter.html">Distance Converter</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="container">
+      <h1>Number System Converter</h1>
+      <div class="converter">
+        <label for="numberInput">Enter a number:</label>
+        <input type="text" id="numberInput" placeholder="Enter a number">
+
+        <label for="fromBase">From Base:</label>
+        <select id="fromBase">
+          <option value="decimal">Decimal</option>
+          <option value="binary">Binary</option>
+          <option value="hexadecimal">Hexadecimal</option>
+          <option value="octal">Octal</option>
+        </select>
+
+        <label for="toBase">To Base:</label>
+        <select id="toBase">
+          <option value="binary">Binary</option>
+          <option value="decimal">Decimal</option>
+          <option value="hexadecimal">Hexadecimal</option>
+          <option value="octal">Octal</option>
+        </select>
+
+        <button onclick="convertNumber()">Convert</button>
+
+        <div class="result" id="result"></div>
+      </div>
+    </section>
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-logo">
+          <img src="logo 1.png" alt="" class="logo" />
+        </div>
+    
+        <div class="footer-links">
+          <div>
+            <h4>Learn More</h4>
+            <ul>
+              <li><a href="https://youtu.be/FFDMzbrEXaE?si=LGe__Aa7NrfGLPmB">Number System Conversion</a></li>
+              <li><a href="https://www.w3schools.com/c/index.php">Basic C Programming</a></li>
+              <li><a href="https://www.w3schools.com/css/default.asp">Basic CSS</a></li>
+              <li><a href="https://www.w3schools.com/js/default.asp">Basic JavaScript</a></li>
+            </ul>
+          </div>
+        </div>
+    
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    function convertNumber() {
+      const numberInput = document.getElementById('numberInput').value.trim();
+      const fromBase = document.getElementById('fromBase').value;
+      const toBase = document.getElementById('toBase').value;
+
+      if (!numberInput) {
+        alert("Please enter a number.");
+        return;
+      }
+
+      let numberInDecimal;
+      // Convert input number to decimal based on the selected base
+      if (fromBase === 'decimal') {
+        numberInDecimal = parseInt(numberInput, 10);
+      } else if (fromBase === 'binary') {
+        numberInDecimal = parseInt(numberInput, 2);
+      } else if (fromBase === 'hexadecimal') {
+        numberInDecimal = parseInt(numberInput, 16);
+      } else if (fromBase === 'octal') {
+        numberInDecimal = parseInt(numberInput, 8);
+      }
+
+      if (isNaN(numberInDecimal)) {
+        alert("Invalid number format for the selected base.");
+        return;
+      }
+
+      let convertedNumber;
+      // Convert decimal to the target base
+      if (toBase === 'decimal') {
+        convertedNumber = numberInDecimal.toString(10);
+      } else if (toBase === 'binary') {
+        convertedNumber = numberInDecimal.toString(2);
+      } else if (toBase === 'hexadecimal') {
+        convertedNumber = numberInDecimal.toString(16).toUpperCase();
+      } else if (toBase === 'octal') {
+        convertedNumber = numberInDecimal.toString(8);
+      }
+
+      document.getElementById('result').textContent = `Converted number: ${convertedNumber}`;
+      
+    }
+  </script>
+</body>
+</html>
